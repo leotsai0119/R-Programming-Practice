@@ -1,7 +1,6 @@
 complete <- function(path, id = 1:length(dir(path))) {
-        p <- paste("~/Coursera/R Programming/", directory, "/", sep = "")
-        fileNames <- dir(p)[id]
-        filePaths <- paste(p, fileNames, sep = "")
+        fileNames <- dir(path)[id]
+        filePaths <- paste(path, fileNames, sep = "")
         myData <- list(NULL)
         use <- list(NULL)
         ID <- as.character(NULL)
