@@ -5,6 +5,7 @@ importCSV <- function(path, id = 1:length(dir(path))) {
         do.call(rbind, l) #combine the lists by row
 }
 
+#this function returns a data frame which contains full observed cases. ig. withous NAs.
 complete <- function(directory, id = 1:332) {
         p <- paste("~/Coursera/R Programming/", directory, "/", sep = "")
         fileNames <- dir(p)[id]
