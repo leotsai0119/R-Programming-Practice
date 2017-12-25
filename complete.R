@@ -1,4 +1,4 @@
-complete <- function(path, id = 332) {
+complete <- function(path, id = 1:332) {
         p <- paste("~/Coursera/R Programming/", directory, "/", sep = "")
         fileNames <- dir(p)[id]
         filePaths <- paste(p, fileNames, sep = "")
