@@ -14,14 +14,14 @@ pp <- list(NULL)
 dd <- list(NULL)
 path <- "~/R project/Census 1990/Sample 1%/RawData/"
 
-#loo 5 times
+#loop 5 times
 for(i in 1:5) {
         #generate a list of starts and ends
-        ps[[i]] <- c(start[1:9], start[10:34] + 38*(i-1), start[35:39])
-        pe[[i]] <- c(end[1:9], end[10:34] + 38*(i-1), start[35:39])
+        ps[[i]] <- c(start[1:9], start[10:34] + 38*(i-1), start[35] + (i-1))
+        pe[[i]] <- c(end[1:9], end[10:34] + 38*(i-1), start[35] + (i-1))
         pp[[i]] <- mapply(fwf_positions, ps[[i]], pe[[i]], SIMPLIFY = FALSE, USE.NAMES = FALSE)
         pp[[i]] <- do.call(rbind, pp[[i]])
-        pp[[i]]$col_names <- codebook$變項名稱[c(1:34, 89:93)]
+        pp[[i]]$col_names <- c(codebook$變項名稱[1:34], "OMG")
         #read all the files in one directory
         filenames <- dir(path)
         filepaths <- paste(path, filenames, sep = "")
@@ -30,3 +30,5 @@ for(i in 1:5) {
         #row binding the elements
         data <- do.call(rbind, dd)
 }
+#199232
+myData <- data[OMG %in% c("Y", "I", "R") & COUNTY != 28 & COUNTY != 29]
