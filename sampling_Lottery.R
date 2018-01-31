@@ -56,6 +56,8 @@ three <- length(unsp[unsp == 5])
 two <- length(usp[usp == 6])
 one <- length(unsp[unsp == 6])
 
+one
+
 all <- as.list(c(one, two, three, four, five, six, seven, eight))
 
 #test
