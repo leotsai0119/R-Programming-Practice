@@ -8,12 +8,12 @@ for(i in 1:n) {
 }
 unique(l)
 
-
 #vanilla, apply
 rm(list = ls())
 pool <- 1:46
 l <- rep(list(pool), 1000) # create a list full of 1:46
 pull <- unique(sapply(l, sample, 7, replace = FALSE)) #unique
+
 
 #function with sapply
 rm(list = ls())
@@ -25,7 +25,7 @@ TaiwanLottery <- function(n) {
 }
 
 #testing the funciton
-myLottery <- TaiwanLottery(100)
+myLottery <- TaiwanLottery(100000)
 
 #matching
 special <- 35
@@ -40,20 +40,23 @@ if(length(which((pick == special) == TRUE)) > 0) {
         sp <- pick[ , keep] # with sp number
         nsp <- pick[ , -keep] # withous sp number
         msp <- apply(sp, 2, match, jackpot) #apply match function again
-        usp <- apply(mm , 2, function(x) sum(!is.na(x))) 
+        usp <- apply(msp , 2, function(x) sum(!is.na(x)))
+        mnsp <- apply(nsp, 2, match, jackpot) # apply match function
+        unsp <- apply(mnsp, 2, function(x) sum(is.na(x)))
 } else {
         keep <- pick
 }
 
-
+eight <- length(unsp[unsp == 3])
 seven <- length(usp[usp == 3])
 six <- length(usp[usp == 4])
+five <- length(unsp[unsp == 4])
 four <- length(usp[usp == 5])
+three <- length(unsp[unsp == 5])
 two <- length(usp[usp == 6])
+one <- length(unsp[unsp == 6])
 
-#na <- !is.na(m)
-#use <- apply(na, 2, sum) >= 3
-#pick <- myLottery[ , which(use == TRUE)]
+all <- as.list(c(one, two, three, four, five, six, seven, eight))
 
 #test
 fruit <- c("apple", "banana", "pear", "pineapple")
