@@ -1,7 +1,7 @@
 rm(list = ls())
 library(readr)
 library(data.table)
-codebook <- readxl::read_excel("~/R Project/Census 1990/codebook.xlsx")
+codebook <- readxl::read_excel("~/R_project_with_Peng/Data/Census 1990/codebook.xlsx")
 
 #from variable "county" to "living"
 start <- as.integer(codebook$起[c(1:34, 89:93)])
@@ -12,7 +12,7 @@ ps <- list(NULL)
 pe <- list(NULL)
 pp <- list(NULL)
 dd <- list(NULL)
-path <- "~/R project/Census 1990/Sample 1%/RawData/"
+path <- "~/R_project_with_Peng/Data/Census 1990/Sample 1%/RawData/"
 
 #loop 5 times
 for(i in 1:5) {

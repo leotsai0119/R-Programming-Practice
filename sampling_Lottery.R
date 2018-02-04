@@ -14,6 +14,11 @@ pool <- 1:46
 l <- rep(list(pool), 1000) # create a list full of 1:46
 pull <- unique(sapply(l, sample, 7, replace = FALSE)) #unique
 
+#matrix_
+rm(list = ls())
+n <- 100
+m <- matrix(1:49, ncol = n, nrow = 49)
+pull <- unique(apply(m, 2, sample, 7, replace = FALSE))
 
 #function with sapply
 rm(list = ls())
@@ -21,6 +26,15 @@ rm(list = ls())
 TaiwanLottery <- function(n) {
         l <- rep(list(1:46), n)
         pull <- unique(sapply(l, sample, 7, replace =FALSE))
+        return(pull)
+}
+
+#function with matrix and apply
+rm(list = ls())
+
+TaiwanLottery <- function(n) {
+        m <- matrix(1:49, ncol = n, nrow = 49)
+        pull <- unique(apply(m, 2, sample, 7, replace = FALSE))
         return(pull)
 }
 
