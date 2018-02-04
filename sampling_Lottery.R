@@ -25,7 +25,7 @@ TaiwanLottery <- function(n) {
 }
 
 #testing the funciton
-myLottery <- TaiwanLottery(100000)
+myLottery <- TaiwanLottery(10000)
 
 #matching
 special <- 35
