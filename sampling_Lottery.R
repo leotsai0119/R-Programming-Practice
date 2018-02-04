@@ -8,7 +8,7 @@ for(i in 1:n) {
 }
 unique(l)
 
-#vanilla, apply
+#vanilla, list with sapply
 rm(list = ls())
 pool <- 1:46
 l <- rep(list(pool), 1000) # create a list full of 1:46
@@ -70,10 +70,12 @@ three <- length(unsp[unsp == 5])
 two <- length(usp[usp == 6])
 one <- length(unsp[unsp == 6])
 
-one
-
-all <- as.list(c(one, two, three, four, five, six, seven, eight))
-
-#test
-fruit <- c("apple", "banana", "pear", "pineapple")
-str_count(fruit, "a")
+#merge into a single function
+TaiwanLottery <- function(n, numbers, special) {
+        m <- matrix(1:49, ncol = n, nrow = 49)
+        myLottery <- unique(apply(m, 2, sample, 7, replace = FALSE))
+        jackpot <- c(numbers, special)
+        m <- apply(myLottery, 2, match, jackpot)
+        use <- apply(m, 2, function(x) sum(!is.na(x)))
+        pick <- myLottery[ , which(use >= 3)]
+}
