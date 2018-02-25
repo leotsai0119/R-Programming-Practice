@@ -10,8 +10,12 @@ pull <- t(unique(sapply(l, sample, 7, replace = FALSE)))
 
 #function with sapply
 rm(list = ls())
+<<<<<<< HEAD
 
 TaiwanLottery <- function(n) {
+=======
+TaiwanLottery <- function(n){
+>>>>>>> master
         l <- rep(list(1:46), n)
         pull <- t(unique(sapply(l, sample, 7, replace =FALSE)))
         return(pull)
