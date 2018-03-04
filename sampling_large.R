@@ -34,7 +34,7 @@ rm(list = ls())
 #population <- iris$Sepal.Length
 population <- 1:10000
 size <- 30
-times <- 1000000
+times <- 1000
 m <- matrix(runif(times*size), times, size)
 n <- length(population)
 p <- ceiling(n*m)
