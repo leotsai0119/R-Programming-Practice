@@ -1,16 +1,16 @@
 rm(list = ls())
 #vanilla sampling with for loop
-x <- 1:10000
-s1 <- list(NULL)
-m1 <- list(NULL)
+x <- iris$Sepal.Length
+s <- list(NULL)
+m <- list(NULL)
 for(i in 1:50){
-      s1[[i]] <- sample(x, 30, replace = FALSE)
-      m1[[i]] <- mean(s1[[i]])
-      d1 <- as.data.frame(do.call(rbind, m1))
+      s[[i]] <- sample(x, 30, replace = FALSE)
+      m[[i]] <- mean(s[[i]])
+      d <- as.data.frame(do.call(rbind, m))
 }
 
 #vanilla function with for loop
-population <- 1:10000
+population <- iris$Sepal.Length
 LLN <- function(population, size, times){
         s <- list(NULL)
         m <- list(NULL)
@@ -18,9 +18,9 @@ LLN <- function(population, size, times){
                 s[[i]] <- sample(population, size, replace = FALSE)
                 m[[i]] <- mean(s[[i]])
         }
-        d <- as.data.frame(do.call(rbind, m))
-        p <- ggplot2::qplot(d$V1, geom = "histogram", bins = 50)
-        l <- list("sample" = d, "histogram" = p)
+        d <- as.data.frame(do.call(rbind, m)) #dataframe for ggplot2
+        p <- ggplot2::qplot(d$V1, geom = "histogram", bins = 50) #plot
+        l <- list("sample" = d, "histogram" = p) #create a list of output objects
         return(l)
 }
 
@@ -29,3 +29,13 @@ y <- LLN(population, 30, 1000)
 d1 <- y$sample
 p <- y$histogram
 
+#vanilla sampling with apply
+rm(list = ls())
+#population <- iris$Sepal.Length
+population <- 1:10000
+size <- 30
+times <- 1000000
+m <- matrix(runif(times*size), times, size)
+n <- length(population)
+p <- ceiling(n*m)
+samples <- matrix(population[p], times)
