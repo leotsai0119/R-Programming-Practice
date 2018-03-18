@@ -56,12 +56,12 @@ LLN <- function(population, size, times){
 
 #test
 d <- 1:100
-d1 <- LLN(d, 10, 1000)
-d2 <- LLN(d, 50, 1000)
-d3 <- LLN(d, 500, 1000)
-d4 <- LLN(d, 10000, 1000)
+d1 <- LLN(d, 5, 10000)
+d2 <- LLN(d, 50, 10000)
+d3 <- LLN(d, 500, 10000)
+d4 <- LLN(d, 5000, 10000)
 myData <- rbind.data.frame(d1, d2, d3, d4)
-#plotting histograms
-p <- ggplot(myData, aes(x = means, fill = size, alpha = .05)) + geom_histogram(binwidth = 5, position = "identity")
-p1 <- ggplot(myData, aes(x = means, color = size)) + geom_density()
+#plotting histograms and density curves
+p1 <- ggplot(myData, aes(x = means, fill = size, alpha = .05)) + geom_histogram(binwidth = .5, position = "identity") + facet_grid(~size) + theme_classic()
+p2 <- ggplot(myData, aes(x = means, color = size)) + geom_density() + theme_classic()
              
