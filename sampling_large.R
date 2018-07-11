@@ -40,6 +40,7 @@ m <- matrix(runif(times*size), times, size)
 n <- length(population)
 p <- ceiling(n*m)
 samples <- matrix(population[p], times)
+
 #merge into a function
 rm(list = ls())
 LLN <- function(population, size, times){
@@ -55,13 +56,15 @@ LLN <- function(population, size, times){
 }
 
 #test
-d <- 1:100
-d1 <- LLN(d, 5, 10000)
-d2 <- LLN(d, 50, 10000)
-d3 <- LLN(d, 500, 10000)
-d4 <- LLN(d, 5000, 10000)
+d <- iris$Sepal.Length
+d1 <- LLN(d, 30, 10)
+d2 <- LLN(d, 30, 100)
+d3 <- LLN(d, 30, 1000)
+d4 <- LLN(d, 30, 10000)
 myData <- rbind.data.frame(d1, d2, d3, d4)
 #plotting histograms and density curves
-p1 <- ggplot(myData, aes(x = means, fill = size, alpha = .05)) + geom_histogram(binwidth = .5, position = "identity") + facet_grid(~size) + theme_classic()
-p2 <- ggplot(myData, aes(x = means, color = size)) + geom_density() + theme_classic()
+p1 <- ggplot(myData, aes(x = means, fill = times, alpha = .05)) + geom_histogram(binwidth = .1, position = "identity") + facet_grid(. ~ times) + theme_classic()
+p2 <- ggplot(myData, aes(x = means, color = times)) + geom_density() + theme_classic()
+
+p_mu <- ggplot(iris) + aes(x = iris$Sepal.Length, alpha = .05) + geom_histogram(binwidth = .1) + theme_classic()
              
