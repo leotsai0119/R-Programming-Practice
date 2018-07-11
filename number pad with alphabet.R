@@ -9,8 +9,11 @@ hello <- "helloworld"
 sp <- strsplit(hello, split = "", fixed = TRUE) #list
 sp <- unlist(sp) #unlist
 
-dff <- data.frame(row.names = l, values = s)
+dff <- data.frame(row.names = l$alphabet, values = row.names(l))
 dff[sp, ]
+
+#test
+ll <- unlist(rep(2:9, c(3, 3, 3, 3, 3, 4, 3, 4)))
 
 #######
 
@@ -20,9 +23,9 @@ out1 <- paste0(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)])
 out2 <- paste(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)], sep = ",")
 #
 text <- "aabbccccdd"
-sst <- strsplit(text, "")[[1]]
-sst <- strsplit(text, split = "")
-out <- paste0(sst[c(TRUE, FALSE)], sst[c(FALSE, TRUE)])
+sst <- strsplit(text, "")[[1]] ; sst
+#sst <- strsplit(text, split = "") ; sst
+out <- paste0(sst[c(TRUE, FALSE)], sst[c(FALSE, TRUE)]) ; out
 #
         
 #######
