@@ -2,24 +2,28 @@
 #number pad with alphabets
 rm(list = ls())
 l <- split(letters, rep(2:9, c(3, 3, 3, 3, 3, 4, 3, 4))) #list
-l <- data.frame(alphabet = unlist(l, recursive = FALSE)) #unlist and data.frame
+l <- unlist(l, recursive = FALSE); l #unlist
+
+#query
+n <- "212223313233"
+n <- strsplit(n, split = "")[[1]]; n
+q <- paste0(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)]); q
+df <- data.frame(row.names = names(l), value = l)
+df[q, ]
 
 #reverse query
 hello <- "helloworld"
-sp <- strsplit(hello, split = "", fixed = TRUE) #list
-sp <- unlist(sp) #unlist
+sp <- unlist(strsplit(hello, split = "", fixed = TRUE)); sp #list
+#sp <- unlist(sp) #unlist
 
-dff <- data.frame(row.names = l$alphabet, values = row.names(l))
+dff <- data.frame(row.names = l, value = names(l))
 dff[sp, ]
-
-#test
-ll <- unlist(rep(2:9, c(3, 3, 3, 3, 3, 4, 3, 4)))
 
 #######
 
 n <- "2122232425262728"
 n <- strsplit(n, split = "")[[1]]
-out1 <- paste0(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)])
+out1 <- paste0(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)]); out1
 out2 <- paste(n[c(TRUE, FALSE)], n[c(FALSE, TRUE)], sep = ",")
 #
 text <- "aabbccccdd"
