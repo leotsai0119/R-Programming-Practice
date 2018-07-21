@@ -44,3 +44,12 @@ vec=c("b","a","c"); vec
 df=data.frame(row.names=letters[1:5],values=1:5); df
 df[rownames(df) %in% vec,1]
 df[vec, ]
+
+#######
+x <- "abcdefggh"
+y <- strsplit(x, split = "")
+charmatch(y[[1]][1], letters) == 1
+
+x <- 1
+y <- 1
+if(x == y){print("Hello World")}
