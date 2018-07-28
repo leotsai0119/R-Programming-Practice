@@ -13,7 +13,7 @@ UDNsearch <- function(keyword, dateB, dateE, news="聯合報|經濟日報|聯合
   searchstring <- paste(keyword, "+" , "日期", ">=", dateB, "+", "日期", "<=", dateE, "+" , "報別", "=", news, sep="")
   searchstring <- iconv(searchstring, from = "UTF-8", to = "CP950") #Mac: UTF-8, UDN: big5
   searchstring <- URLencode(searchstring, reserved = TRUE)
-  url <- paste(root, "page=", page, "&udndbid=udndata", "&SearchString=", searchstring, "&sharepage=", sharepage, "$select=1", "&kind=3", "&showUserSearch=", sep="")
+  url <- paste(root, "page=", page, "&udndbid=udndata", "&SearchString=", searchstring, "&sharepage=", sharepage, "&select=1", "&kind=3", "&showUserSearch=", sep="")
   return(url)
 }
 #crawler
