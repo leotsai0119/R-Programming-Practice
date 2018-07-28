@@ -1,4 +1,5 @@
 library(xml2)
+library(XML)
 library(magrittr)
 library(data.table)
 library(progress)
@@ -88,9 +89,10 @@ t <- 10              #設定間隔秒數
 
 #用這一行檢查能不能正確導引到查詢網址產生結果，可以之後再進loop
 UDNsearch(keyword, DateB, DateE, page=1) %>% cat()
+url <- UDNsearch(page = 1)
 
 #執行UDNcrawler 
-df <- UDNcrawler()
+df <- UDNcrawler(keyword, DateB, DateE, page = 1)
 
 #存檔
 save(df, file = "~/Desktop/df.rda") #存檔路徑用桌面會無法寫入
@@ -102,6 +104,7 @@ shutdown()
 #loop
 #xml2::
 url <- UDNsearch(keyword, DateB, DateE, page=1)
-doc <- read_html(url)
+doc <- htmlParse(url, useInternalNodes = TRUE)
+doc <- read_html(url, encoding = "CP950")
 xml_find_all(doc, xpath = "//a[@class='t']") %>% xml_text() %>% iconv(from = "UTF-8", to = "UTF-8") -> title
 xml_find_all(doc, xpath = "//span[@class='date']") %>% xml_text() -> date
