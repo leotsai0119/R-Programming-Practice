@@ -5,12 +5,13 @@ library(progress)
 
 rm(list = ls())
 
+#set the parameter
 keyword <- "APEC"
 DateB <- 20170101
 DateE <- 20180101
 news <- "聯合報"
-p <- 1
-t <- 10
+p <- 1 #擷取的頁數
+t <- 10 #間隔秒數
 
 #url
 UDNsearch <- function(keyword, DateB, DateE, news, page = 1, sharepage = 50){
@@ -21,16 +22,12 @@ UDNsearch <- function(keyword, DateB, DateE, news, page = 1, sharepage = 50){
               DateE, "+" , "報別", "=", news, sep="") %>% iconv(from = "UTF-8", to = "Big5") %>%
                 URLencode() -> searchstring
         
-        #searchstring <- iconv(searchstring, from = "UTF-8", to = "Big5")
-        
-        #searchstring <- URLencode(searchstring)
-        
         url <- paste(root, "&udndbid=udndata",  "&page=", page, "&SearchString=", 
                      searchstring, "&sharepage=", sharepage, "&select=0", "&kind=2",
                      "&showSearchString=", sep="")
         
         return(url)
-}
+        }
 
 #crawler
 UDNcrawler <- function(){
@@ -84,49 +81,13 @@ UDNcrawler <- function(){
         print(end - start) #輸出總花費時間
         
         return(df)
-}
-
-url <- UDNsearch(keyword, DateB, DateE, news)
-doc <- read_html(url)
-html_nodes(doc, ".control-pic a") %>% html_text() -> title
-html_nodes(doc, ".news span") %>% html_text() -> date
-
-#shutdown computer
-shutdown <- function(wait = 0){
-  Sys.sleep(wait)
-  ifelse(.Platform$OS.type == "windows", shell("shutdown -s -t 0"), 
-         system("shutdown -h now"))
-}
-
-#前置作業
-#到UDN網站確認關鍵字搜尋後頁面數p #簡目 #每頁顯示數要選擇50
-keyword <- "((拼經濟OR拚經濟)+資本主義)"    #設定關鍵字
-keyword <- "APEC"
-DateB <- 19500101    #設定起始日期
-DateE <- 20151231    #設定結束日期
-news <- "聯合報|經濟日報|聯合晚報|Upaper"
-p <- 1            #設定爬的頁數
-t <- 10              #設定間隔秒數
-#設定完畢
-
-#用這一行檢查能不能正確導引到查詢網址產生結果，可以之後再進loop
-UDNsearch(keyword, DateB, DateE, news, page=1) -> a
-url <- UDNsearch(page = 1)
+        }
 
 #執行UDNcrawler 
 df <- UDNcrawler()
 
 #存檔
-save(df, file = "~/Desktop/df.rda") #存檔路徑用桌面會無法寫入
+save(df, file = "~/Desktop/df.rda")
 
 #關機
 shutdown()
-
-#單一頁面
-#loop
-#xml2::
-url <- UDNsearch(keyword, DateB, DateE, page=1)
-doc <- htmlParse(url, useInternalNodes = TRUE)
-doc <- read_html(url, encoding = "CP950")
-xml_find_all(doc, xpath = "//a[@class='t']") %>% xml_text() %>% iconv(from = "UTF-8", to = "UTF-8") -> title
-xml_find_all(doc, xpath = "//span[@class='date']") %>% xml_text() -> date
