@@ -1,0 +1,42 @@
+---
+title: "2019-0513-0523-R basics"
+author: "Cai, Yun-Ting"
+date: "2019/5/23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#
+#### 1. Assignment operator ####
+R使用向左箭號賦值
+```{r assign value}
+# assign value 1 to a
+a <- 1
+# print a
+print(a)
+```
+這個結果代表a是一個向量，1是a的第一個元素。
+
+上面的例子使用了`print()`這個功能來印出物件 a 的內容，結果會出現在console中。
+
+也可以利用 R 的 auto print 功能，直接在 console 當中鍵入物件名稱，便會直接顯示。
+
+```{r auto print}
+a <- 1
+a
+```
+
+#
+#### 2. object class ####
+R的物件有五個基本種類：
+
+1. 浮點數（numeric）
+
+2. 整數（integer）
+
+3. 文字 / 字串（character）
+
+4. 
